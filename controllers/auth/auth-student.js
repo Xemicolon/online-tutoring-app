@@ -6,6 +6,7 @@ exports.register = ash(async (req, res, next) => {
   const { first_name, last_name, email, password } = req.body;
   try {
     const user = await Student.findOne({ email });
+
     if (user) {
       res.status(401).json({
         status: false,
