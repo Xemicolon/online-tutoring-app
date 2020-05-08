@@ -1,13 +1,11 @@
 const ash = require("express-async-handler");
 const Tutor = require("../../models/Tutor");
-const Subject = require('../../models/Subject')
+const Subject = require("../../models/Subject");
 require("../../middleware/auth");
-
-
 
 // @desc      Put register tutor to take a subject
 // @route     PUT /api/v1/category/:catId/subject/:subId/register
-// @access    Private/Admin, Tutor
+// @access    Private/Admin Tutor
 exports.tutorRegisterSubject = ash(async (req, res, next) => {
   const subject = await User.findByIdAndUpdate(
     req.user._id,
