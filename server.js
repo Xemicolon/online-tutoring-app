@@ -4,9 +4,9 @@ const bodyParser = require("body-parser");
 const app = express();
 const db = require("./config/config");
 const cors = require("cors");
-const indexRouter = require("./routes/index");
 const Routes = require("./routes/routes");
 const adminRoute = require("./routes/admin");
+const IndexRouter = require("./routes/index");
 
 db();
 const PORT = process.env.PORT || 3000;
@@ -19,6 +19,7 @@ app.listen(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-app.use("/api/v1", indexRouter);
+
+app.use("/api/v1", IndexRouter);
 app.use("/api/v1", Routes);
 app.use("/api/v1", adminRoute);
