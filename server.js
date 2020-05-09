@@ -6,7 +6,7 @@ const db = require("./config/config");
 const cors = require("cors");
 const Routes = require("./routes/routes");
 const adminRoute = require("./routes/admin");
-const IndexRouter = require("./routes/index");
+const IndexRoute = require("./routes/index");
 
 db();
 const PORT = process.env.PORT || 3000;
@@ -20,6 +20,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use("/api/v1", IndexRouter);
+app.use("/api/v1", IndexRoute);
 app.use("/api/v1", Routes);
 app.use("/api/v1", adminRoute);
