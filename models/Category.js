@@ -9,6 +9,9 @@ const CategorySchema = new Schema(
       required: [true, "Add a name of the category"],
       uppercase: true,
     },
+    description: {
+      type: String,
+    },
     subjects: [
       {
         type: Schema.Types.ObjectId,

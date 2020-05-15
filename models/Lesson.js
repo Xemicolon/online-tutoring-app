@@ -3,26 +3,22 @@ const Schema = mongoose.Schema;
 
 const LessonSchema = new Schema(
   {
+    subject: { type: Schema.Types.ObjectId, ref: "Subject" },
     tutor: {
       type: Schema.Types.ObjectId,
-      ref: "Tutor",
+      ref: "User",
     },
     student: {
       type: Schema.Types.ObjectId,
-      ref: "Student",
+      ref: "User",
+    },
+    booked_by: {
+      type: String,
     },
   },
   { timestamps: true }
 );
 
-LessonSchema.index({ student: 1, tutor: 1 }, { unique: true });
-
-LessonSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: "student",
-    select: "first_name last_name email",
-  }).populate({ path: "tutor", select: "first_name last_name email subjects" });
-  next();
-});
+// LessonSchema.index({ student: 1, tutor: 1 }, { unique: true });
 
 module.exports = mongoose.model("Lesson", LessonSchema);

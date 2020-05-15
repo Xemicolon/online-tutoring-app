@@ -10,13 +10,13 @@ const SubjectSchema = new Schema(
     tutors: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Tutor",
+        ref: "User",
       },
     ],
-    category: [{
+    category: {
       type: Schema.Types.ObjectId,
       ref: "Category",
-    }],
+    },
   },
   { timestamps: true }
 );

@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
-const Admin = require("../models/Admin");
+const User = require("../models/User");
 const ash = require("express-async-handler");
 
 exports.authorizeRole = (role) => {
   return ash(async (req, res, next) => {
     const { email } = req.body;
-    const user = await Admin.findOne({ email });
+    const user = await User.findOne({ email });
 
     if (!user) {
       res.status(400).send({
@@ -15,9 +15,9 @@ exports.authorizeRole = (role) => {
       return;
     }
 
-    if (user.role !== role) {
-      res.status(401).send({
-        status: false,
+    if (user.isAdmin === false) {
+      res.send({
+        status: 401,
         message: `You don't have enough permissions to view this route`,
       });
       return;
@@ -26,22 +26,21 @@ exports.authorizeRole = (role) => {
   });
 };
 
-exports.verifyToken = async (req, res, next) => {
-  const token = req.headers["x-access-token"];
+exports.verifyToken = ash(async (req, res, next) => {
+  let token = req.headers.cookie.split("token=").join("");
   if (token) {
-    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
-      if (err) {
-        return res.status(401).json({
-          message: "Incorrect token",
-        });
-      } else {
-        req.decoded = decoded;
-        next();
-      }
-    });
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    req.user = await User.findById(decoded.id);
+    if (decoded) {
+      req.decoded = decoded;
+      token = req.headers.cookie.split("token=").join("");
+      next();
+    } else {
+      res.send("Invalid token");
+    }
   } else {
     return res.status(401).json({
       message: `You're not authorized to view this page!`,
     });
   }
-};
+});

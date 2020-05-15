@@ -4,51 +4,50 @@ const Subject = require("../../models/Subject");
 require("../../middleware/auth");
 
 exports.getAllSubjects = ash(async (req, res, next) => {
-  const { catName } = req.body;
-  if (!catName) return res.send("Category name cannot be empty");
-  catName.toLowerCase();
-  const category = await Category.findOne({ name: catName });
-  //
-  if (category.subjects.length == 0) {
-    res.status(200).send({
-      catgeory_name: catName.toUpperCase(),
-      subjects: `No subjects found`,
+  const { catId } = req.params;
+  const subjects = await Subject.find({ category: catId });
+
+  if (subjects.length === 0) {
+    res.send({
+      status: 200,
+      message: `No subjects in this category at the moment!`,
     });
     return;
   }
-  res.status(200).send({
-    category_name: catName.toUpperCase(),
-    subjects: category.subjects,
+
+  res.send({
+    status: 200,
+    subjects: subjects,
   });
+
+  // if (category.subjects.length == 0) {
+  //   res.status(200).send({
+  //     catgeory_name: categName.toUpperCase(),
+  //     subjects: `No subjects in this category at the moment.`,
+  //   });
+  //   return;
+  // }
+  // res.status(200).send({
+  //   category_name: categName.toUpperCase(),
+  //   subjects: category.subjects,
+  // });
 });
 
 exports.getSubjectById = ash(async (req, res, next) => {
-  const { subName, catId } = req.body;
-  const category = await Category.findOne({ _id: catId });
-
-  if (!category) {
-    res.send(`Category not found or doesn't exist`);
-    return;
-  }
-  //   const foundSubject = await Category.findOne({ subjects });
-  for (subje of category.subjects) {
-    if (subje == subName) {
-      res.send({
-        status: true,
-        message: `Subject found`,
-        subject_name: subName,
-        category_name: category.name,
-        category_id: category._id,
-      });
-      return;
-    }
-    res.status(400).send({
-      status: false,
+  const { subId, catId } = req.params;
+  const subject = await Subject.findOne({ _id: subId, category: catId });
+  if (!subject) {
+    res.send({
+      status: 400,
       message: `Subject doesn't exist in this category`,
-      category_name: category.name,
-      category_id: category._id,
     });
   }
+  res.send({
+    status: 200,
+    message: `Subject found`,
+    subject_name: `${subject.name}`,
+    subject_category: `${subject.category}`,
+  });
 });
 
 exports.showCategories = ash(async (req, res, next) => {
@@ -71,38 +70,16 @@ exports.showCategories = ash(async (req, res, next) => {
   }
 });
 
-exports.getTutorByFirstName = ash(async (req, res, next) => {
-  const { first_name } = req.body;
-  if (!first_name) {
-    res.status(400).send({
-      message: `First Name of Tutor cannot be blank`,
-    });
-  }
-
-  await Tutor.find({ first_name: first_name })
-    // .collation({ locale: "en", strength: 2 })
-    .sort({ first_name: 1 })
-    .then((user) => {
-      res.status(200).send({
-        result: user,
-      });
-    });
-});
-
-exports.getSubjectByName = ash(async (req, res, next) => {
-  const { name } = req.body;
+exports.getSubjectsByName = ash(async (req, res, next) => {
+  const { name } = req.query;
   if (!name) {
     res.status(400).send({
       message: `Name of subject cannot be blank`,
     });
   }
+  const subject = await Subject.find({ name: name }).sort({
+    name: 1,
+  });
 
-  await Subject.find({})
-    .collation({ locale: "en", strength: 2 })
-    .sort({ name: 1 })
-    .then((subject) => {
-      res.status(200).send({
-        result: subject,
-      });
-    });
+  res.send({ status: 200, subjects: subject });
 });

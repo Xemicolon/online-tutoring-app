@@ -3,13 +3,13 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const AdminSchema = new Schema(
+const UserSchema = new Schema(
   {
-    first_name: {
+    firstName: {
       type: String,
       required: [true, "Please enter a first name"],
     },
-    last_name: { type: String, required: [true, "Please enter a last name"] },
+    lastName: { type: String, required: [true, "Please enter a last name"] },
 
     email: {
       type: String,
@@ -27,16 +27,28 @@ const AdminSchema = new Schema(
     },
     role: {
       type: String,
-      default: "admin",
+      enum: ["student", "tutor"],
       lowercase: true,
     },
-    tutors: { type: Schema.Types.ObjectId, ref: "Tutor" },
-    students: { type: Schema.Types.ObjectId, ref: "Student" },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    subjects: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Subject",
+      },
+    ],
   },
   { timestamps: true }
 );
 
-AdminSchema.pre("save", async function (next) {
+UserSchema.pre("save", async function (next) {
   let user = this;
   if (!user.isModified || !user.isNew) return next();
   const salt = await bcrypt.genSalt(10);
@@ -44,11 +56,11 @@ AdminSchema.pre("save", async function (next) {
   next();
 });
 
-AdminSchema.methods.comparePassword = function (password) {
+UserSchema.methods.comparePassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
 
-AdminSchema.methods.generateJWT = function () {
+UserSchema.methods.generateJWT = function () {
   const today = new Date();
   const expirationDate = new Date(today);
   expirationDate.setDate(today.getDate() + 60);
@@ -66,4 +78,4 @@ AdminSchema.methods.generateJWT = function () {
   });
 };
 
-module.exports = mongoose.model("Admin", AdminSchema);
+module.exports = mongoose.model("User", UserSchema);
