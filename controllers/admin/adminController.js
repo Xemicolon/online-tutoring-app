@@ -339,7 +339,7 @@ exports.updateLessonById = ash(async (req, res, next) => {
 
     const fieldToUpdate = {
       student: student,
-      tutor: tutor,
+      tutor: tutor, 
     };
 
     const lesson = await Lesson.findByIdAndUpdate(lessonId, fieldToUpdate, {

@@ -11,7 +11,7 @@ const CategorySchema = new Schema(
     },
     description: {
       type: String,
-    },
+    }, 
     subjects: [
       {
         type: Schema.Types.ObjectId,

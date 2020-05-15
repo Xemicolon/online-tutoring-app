@@ -10,7 +10,7 @@ const db = async () => {
     })
     .catch((err) => {
       console.error(err);
-    });
+    }); 
 
   console.log(
     `Database Connected\nDatabase Url: ${db_connect.connection.host}`

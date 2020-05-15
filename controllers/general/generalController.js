@@ -71,7 +71,7 @@ exports.showCategories = ash(async (req, res, next) => {
 });
 
 exports.getSubjectsByName = ash(async (req, res, next) => {
-  const { name } = req.query;
+  const { name } = req.query; 
   if (!name) {
     res.status(400).send({
       message: `Name of subject cannot be blank`,

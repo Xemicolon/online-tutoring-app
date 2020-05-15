@@ -13,7 +13,7 @@ exports.authorizeRole = (role) => {
         message: `No user with this email exists and this is an unauthorized route`,
       });
       return;
-    }
+    } 
 
     if (user.isAdmin === false) {
       res.send({

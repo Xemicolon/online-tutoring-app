@@ -18,7 +18,7 @@ const LessonSchema = new Schema(
   },
   { timestamps: true }
 );
-
+ 
 // LessonSchema.index({ student: 1, tutor: 1 }, { unique: true });
 
 module.exports = mongoose.model("Lesson", LessonSchema);

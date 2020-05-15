@@ -91,7 +91,7 @@ exports.logout = ash(async (req, res, next) => {
       maxAge: 0,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-    })
+    }) 
     .json({
       status: 200,
       message: `You have successfully logged out`,

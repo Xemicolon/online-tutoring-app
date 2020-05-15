@@ -125,7 +125,7 @@ router.patch(
   "/lesson",
   validate,
   verifyToken,
-  authorizeRole("admin"),
+  authorizeRole("admin"), 
   updateLessonById
 );
 router.delete(

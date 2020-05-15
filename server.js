@@ -19,7 +19,7 @@ app.listen(
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors()); 
 
 app.use("/api/v1", AuthRoutes);
 app.use("/api/v1", IndexRoute);
