@@ -77,3 +77,15 @@ POST https://online-tutor-api.herokuapp.com/api/v1/auth/register
 | email     | Email of user      | Yes      |
 | password  | Password of user   | Yes      |
 | role      | Role of user       | Yes      |
+
+Example:
+
+```
+{
+"firstName": "Sleek",
+"lastName": "Codes",
+"email": "sleekcodes@tutor.com",
+"password": "123456",
+"role": "tutor"
+}
+```
