@@ -7,7 +7,7 @@ require("../../middleware/auth");
 
 exports.addCategory = ash(async (req, res, next) => {
   const { name, description } = req.body;
-  if (!await User.findOne({ role: req.user.role })) {
+  if (!(await User.findOne({ role: req.user.role }))) {
     res.send("ok");
   }
 
@@ -17,6 +17,7 @@ exports.addCategory = ash(async (req, res, next) => {
     name.toLowerCase() != "primary"
   ) {
     return res.status(403).send({
+      status: 403,
       message: "Category name must be primary, jss or sss",
     });
   }
