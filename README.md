@@ -46,14 +46,15 @@ password: 12345
 
 #### Status code
 
-Status Code | Description
-200 | OK
-201 | Created
-400 | Bad request
-401 | Unauthorized
-403 | Forbidden
-404 | Not found
-500 | Internal server error
+| Status Code | Description           |
+| ----------- | --------------------- |
+| 200         | OK                    |
+| 201         | Created               |
+| 400         | Bad request           |
+| 401         | Unauthorized          |
+| 403         | Forbidden             |
+| 404         | Not found             |
+| 500         | Internal server error |
 
 ### Authentication
 
