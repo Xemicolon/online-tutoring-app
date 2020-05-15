@@ -89,3 +89,27 @@ Example:
 "role": "tutor"
 }
 ```
+
+> POST Login
+
+Sign in a user
+
+```
+https://online-tutor-api.herokuapp.com/api/v1/auth/login
+```
+
+##### Body
+
+| Key      | Value            | Required |
+| -------- | ---------------- | -------- |
+| email    | Email of user    | Yes      |
+| password | Password of user | Yes      |
+
+Example:
+
+```
+{
+"email": "sleekcodes@tutor.com",
+"password": "123456"
+}
+```
