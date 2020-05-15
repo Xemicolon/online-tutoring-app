@@ -16,28 +16,28 @@ exports.addCategory = ash(async (req, res, next) => {
     name.toLowerCase() != "sss" &&
     name.toLowerCase() != "primary"
   ) {
-    return res.status(403).send({
-      status: 403,
+    return res.status(400).send({
+      status: 400,
       message: "Category name must be primary, jss or sss",
     });
   }
   try {
     const category = await Category.findOne({ name });
     if (category) {
-      res.json({
-        status: 401,
+      res.status(400).json({
+        status: 400,
         message: `Category - ${category.name} exists`,
       });
       return;
     }
     const newCat = await Category.create({ name, description });
-    res.json({
+    res.status(200).json({
       status: 200,
       message: `New category - ${newCat.name} added`,
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ success: false, message: err.message });
+    res.status(500).json({ status: 500, message: err.message });
   }
 });
 
@@ -63,19 +63,17 @@ exports.updateCategory = ash(async (req, res, next) => {
       });
     }
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+    res.status(500).json({ status: 500, message: err.message });
   }
 });
 
 exports.deleteCategory = ash(async (req, res, next) => {
   try {
     const { catId } = req.params;
-    if (!catId) {
-      res.json({ status: 401, message: `Category Id (catId) cannot be blank` });
-    }
+
     const category = await Category.findById(catId);
     if (!category) {
-      res.json({
+      res.status(404).json({
         status: 404,
         message: `Category not found or doesn't exist`,
       });
@@ -87,7 +85,7 @@ exports.deleteCategory = ash(async (req, res, next) => {
       catgeory: {},
     });
   } catch (err) {
-    res.status(500).json({ status: false, message: err.message });
+    res.status(500).json({ status: 500, message: err.message });
   }
 });
 
@@ -97,7 +95,7 @@ exports.addSubject = ash(async (req, res, next) => {
   const cat = await Category.findOne({ _id: req.params.catId });
   if (!cat) {
     return next(
-      res.send({
+      res.status(404).send({
         status: 404,
         message: `Category not found`,
       })
@@ -111,8 +109,8 @@ exports.addSubject = ash(async (req, res, next) => {
       a = JSON.stringify(a);
       b = JSON.stringify(b);
       if (suby.name.toLowerCase() === name.toLowerCase() || a !== b) {
-        res.send({
-          status: 200,
+        res.status(403).send({
+          status: 403,
           message: `You cannot add the same subject twice in a category!`,
         });
         return;
@@ -131,14 +129,14 @@ exports.addSubject = ash(async (req, res, next) => {
       { new: true, useFindAndModify: false }
     );
 
-    res.send({
+    res.status(200).send({
       status: 200,
       message: `Subject created successfully`,
       new_subject_name: newSubject.name,
       new_subject_category: newSubject.category,
     });
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+    res.status(500).json({ status: 500, message: err.message });
   }
 });
 
@@ -146,7 +144,7 @@ exports.updateSubjectById = ash(async (req, res, next) => {
   const { name } = req.body;
   const subject = await Subject.findById(req.params.subId);
   if (!subject) {
-    res.send({
+    res.status(404).send({
       status: 404,
       message: `Subject not found or doesn't exist`,
     });
@@ -158,7 +156,7 @@ exports.updateSubjectById = ash(async (req, res, next) => {
       name: name,
     }
   );
-  res.send({
+  res.status(200).send({
     status: 200,
     message: `${subject.name} has been updated to ${name}`,
   });
@@ -168,14 +166,14 @@ exports.deleteSubjectById = ash(async (req, res, next) => {
   const { subId, catId } = req.params;
   const subject = await Subject.findOne({ _id: subId });
   if (!subject) {
-    res.send({
-      status: 200,
-      message: `Subject has been deleted or doesn't exist`,
+    res.status(404).send({
+      status: 404,
+      message: `Subject doesn't exist`,
     });
   }
   await Subject.findByIdAndDelete({ _id: subId });
   await Category.update({ _id: catId }, { $pull: { subjects: subId } });
-  res.json({
+  res.status(200).json({
     status: 200,
     message: "Subject deleted successfully",
     subject: {},
@@ -185,22 +183,23 @@ exports.deleteSubjectById = ash(async (req, res, next) => {
 exports.getAllTutors = ash(async (req, res, next) => {
   const tutors = await User.find({ role: "tutor" });
   res.status(200).send({
+    status: 200,
     all_tutors: tutors,
   });
 });
 
 exports.getTutorById = ash(async (req, res, next) => {
   const { tutorId } = req.params;
-  if (!tutorId) {
-    res.send(`Tutor ID field cannot be empty`);
-    return;
-  }
   const tutor = await User.findOne({ _id: tutorId });
   if (!tutor) {
-    res.send(`Tutor doesn't exist or ID is invalid`);
+    res.status(404).send({
+      status: 404,
+      message: `Tutor doesn't exist or ID is invalid`,
+    });
     return;
   }
   res.status(200).send({
+    status: 200,
     tutor_details: tutor,
   });
 });
@@ -209,7 +208,10 @@ exports.deactivateTutorById = ash(async (req, res, next) => {
   const { tutorId } = req.params;
   const tutor = await User.findOne({ _id: tutorId });
   if (tutor.isActive != true) {
-    res.send(`This tutor has been deactivated. Contact admin`);
+    res.status(400).send({
+      status: 400,
+      message: `This tutor has been deactivated. Contact admin`,
+    });
     return;
   }
   const deactivated = await User.findByIdAndUpdate(
@@ -218,6 +220,7 @@ exports.deactivateTutorById = ash(async (req, res, next) => {
     { new: true, runValidators: true }
   );
   res.status(200).send({
+    status: 200,
     message: `Tutor has been successfully deactivated`,
     deacitcated_tutor: deactivated,
   });
@@ -246,15 +249,15 @@ exports.bookLesson = ash(async (req, res, next) => {
     )
   ) {
     return next(
-      res.send({
-        status: 400,
+      res.status(404).send({
+        status: 404,
         message: `This category ${categoryName} cannot be found`,
       })
     );
   }
   if (!subject) {
     return next(
-      res.send({
+      res.status(404).send({
         status: 404,
         message: `Subject doesn't exist or is not in this category!`,
       })
@@ -263,7 +266,7 @@ exports.bookLesson = ash(async (req, res, next) => {
 
   if (!tutor) {
     return next(
-      res.send({
+      res.status(404).send({
         status: 404,
         message: `Tutor doesn't exist!`,
       })
@@ -272,7 +275,7 @@ exports.bookLesson = ash(async (req, res, next) => {
 
   if (!student) {
     return next(
-      res.send({
+      res.status(404).send({
         status: 404,
         message: `Student doesn't exist!`,
       })
@@ -280,7 +283,6 @@ exports.bookLesson = ash(async (req, res, next) => {
   }
 
   const tutorTakesSubject = tutor.subjects.filter((sub) =>
-    //  sub._id.equals(subject._id)
     console.log(sub._id.equals(subject._id))
   );
 
@@ -297,6 +299,7 @@ exports.bookLesson = ash(async (req, res, next) => {
     .exec();
 
   res.status(200).send({
+    status: 200,
     message: `Lesson booked`,
     result: newLesson,
   });
@@ -305,10 +308,14 @@ exports.bookLesson = ash(async (req, res, next) => {
 exports.retrieveLessons = ash(async (req, res, next) => {
   const lessons = await Lesson.find({});
   if (!lessons) {
-    res.send("No lessons found");
+    res.status(404).send({
+      status: 404,
+      message: "No lessons found",
+    });
     return;
   }
   res.status(200).send({
+    status: 200,
     lessons: lessons,
   });
 });
@@ -316,19 +323,16 @@ exports.retrieveLessons = ash(async (req, res, next) => {
 exports.getLessonById = ash(async (req, res, next) => {
   const { lessonId } = req.params;
   const lesson = await Lesson.findOne({ _id: lessonId });
-  if (!lessonId) {
-    res.status(400).send({
-      message: `Lesson Id cannot be blank`,
-    });
-    return;
-  }
+
   if (!lesson) {
-    res.status(400).send({
+    res.status(404).send({
+      status: 404,
       message: `Lesson doesn't exist`,
     });
     return;
   }
   res.status(200).send({
+    status: 200,
     message: `Lesson found`,
     lesson_details: lesson,
   });
@@ -352,6 +356,7 @@ exports.updateLessonById = ash(async (req, res, next) => {
     });
 
     res.status(200).send({
+      status: 200,
       previous_details: previousLesson,
       updated_details: lesson,
     });
@@ -364,21 +369,23 @@ exports.deleteLessonById = ash(async (req, res, next) => {
   const { lessonId } = req.params;
   const lesson = await Lesson.findOne({ _id: lessonId });
   if (!lesson) {
-    res.send({
-      status: 400,
+    res.status(404).send({
+      status: 404,
       message: `Lesson doesn't exist`,
     });
     return;
   }
   if (await Lesson.findOneAndDelete({ _id: lessonId })) {
     res.status(200).send({
+      status: 200,
       message: `Lesson deleted`,
     });
     return;
   }
   const deleted = await Lesson.findOne({ _id: lessonId });
   if (!deleted) {
-    res.status(400).send({
+    res.status(404).send({
+      status: 404,
       message: `Lesson doesn't exist`,
     });
     return;
@@ -396,12 +403,12 @@ exports.getTutorByFirstName = ash(async (req, res, next) => {
   });
 
   if (tutor.length < 1) {
-    return res.send({
+    return res.status(404).send({
       status: 404,
       message: `No user with that First Name found`,
     });
   }
-  res.send({
+  res.status(200).send({
     status: 200,
     result: tutor,
   });
