@@ -60,7 +60,8 @@ password: 12345
 
 Create, read and sign out users.
 
-> POST Register  
+> POST Register
+
 Create a new user with roles as student or tutor. P.S: You can't sign up as admin
 
 ```
@@ -72,3 +73,7 @@ POST https://online-tutor-api.herokuapp.com/api/v1/auth/register
 | Key       | Value              | Required |
 | --------- | ------------------ | -------- |
 | firstName | First Name of user | Yes      |
+| lastName  | Last name of user  | Yes      |
+| email     | Email of user      | Yes      |
+| password  | Password of user   | Yes      |
+| role      | Role of user       | Yes      |
