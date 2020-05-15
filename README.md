@@ -113,3 +113,15 @@ Example:
 "password": "123456"
 }
 ```
+
+### Category
+
+Create, read, update and delete category
+
+> POST Create Category
+
+Create categories for subjects. Category can be PRIMARY, JSS & SSS
+
+```
+POST https://online-tutor-api.herokuapp.com/api/v1/category
+```

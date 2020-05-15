@@ -7,6 +7,9 @@ require("../../middleware/auth");
 
 exports.addCategory = ash(async (req, res, next) => {
   const { name, description } = req.body;
+  if (!await User.findOne({ role: req.user.role })) {
+    res.send("ok");
+  }
 
   if (
     name.toLowerCase() != "jss" &&
@@ -339,7 +342,7 @@ exports.updateLessonById = ash(async (req, res, next) => {
 
     const fieldToUpdate = {
       student: student,
-      tutor: tutor, 
+      tutor: tutor,
     };
 
     const lesson = await Lesson.findByIdAndUpdate(lessonId, fieldToUpdate, {

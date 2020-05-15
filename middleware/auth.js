@@ -8,12 +8,12 @@ exports.authorizeRole = (role) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      res.status(400).send({
-        status: false,
+      res.send({
+        status: 401,
         message: `No user with this email exists and this is an unauthorized route`,
       });
       return;
-    } 
+    }
 
     if (user.isAdmin === false) {
       res.send({
@@ -39,7 +39,8 @@ exports.verifyToken = ash(async (req, res, next) => {
       res.send("Invalid token");
     }
   } else {
-    return res.status(401).json({
+    return res.json({
+      status: 401,
       message: `You're not authorized to view this page!`,
     });
   }
