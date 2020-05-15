@@ -38,7 +38,7 @@ npm run start
 ### Admin demo Login:
 
 ```
-email: admin@hng.com
+email: kingabesh@admin.com
 password: 12345
 ```
 
@@ -59,3 +59,10 @@ password: 12345
 ### Authentication
 
 Create, read and sign out users.
+> POST Register
+Create a new user with roles as student or tutor  
+P.S: You can't sign up as admin
+
+```
+POST https://online-tutor-api.herokuapp.com/api/v1/auth/register
+```
