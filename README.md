@@ -38,8 +38,10 @@ npm run start
 ### Admin demo Login:
 
 ```
-email: kingabesh@admin.com
-password: 123456
+{
+        "email': "kingabesh@admin.com",
+        "password": "123456"
+}
 ```
 
 ### API ENDPOINTS:
@@ -82,11 +84,11 @@ Example:
 
 ```
 {
-"firstName": "Sleek",
-"lastName": "Codes",
-"email": "sleekcodes@tutor.com",
-"password": "123456",
-"role": "tutor"
+        "firstName": "Sleek",
+        "lastName": "Codes",
+        "email": "sleekcodes@tutor.com",
+        "password": "123456",
+        "role": "tutor"
 }
 ```
 
@@ -109,8 +111,8 @@ Example:
 
 ```
 {
-"email": "sleekcodes@tutor.com",
-"password": "123456"
+        "email": "sleekcodes@tutor.com",
+        "password": "123456"
 }
 ```
 
@@ -179,8 +181,8 @@ Example
 
 ```
 {
-	"name": "sss",
-	"description": "Category for Senior Secondary School Education"
+	    "name": "sss",
+	    "description": "Category for Senior Secondary School Education"
 }
 ```
 
