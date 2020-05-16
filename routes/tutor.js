@@ -7,7 +7,7 @@ const {
   getRegisteredSubjects,
   deleteRegisteredSubject,
   makeTutorAdmin,
-  makeAdminTutor
+  makeAdminTutor,
 } = require("../controllers/tutor/tutor");
 
 router.put(
@@ -43,7 +43,7 @@ router.put(
 );
 
 router.put(
-  "/:userId/admin-to-tutor",
+  "/:userId/tutor",
   authorizeRole("admin"),
   verifyToken,
   makeAdminTutor

@@ -5,7 +5,7 @@ const User = require("../../models/User");
 require("../../middleware/auth");
 
 // @desc      Put register tutor to take a subject
-// @route     PUT /api/v1/category/:catId/subject/:subId/register
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
 // @access    Private/Admin, Tutor
 exports.tutorRegisterSubject = ash(async (req, res, next) => {
   const { subId, catId } = req.params;
@@ -65,13 +65,9 @@ exports.tutorRegisterSubject = ash(async (req, res, next) => {
   });
 });
 
-// @desc      Get all subjects tutor takes
-// @route     GET /api/v1/users/tutors/subjects
-// @access    Private/Tutor
-exports.getAllTutorSubjects = ash(async (req, res, next) => {
-  // const subjects = await User.find({ _id: req.user._id });
-});
-
+// @desc    Get all registered subjects tutor takes
+// @route   Get /api/v1/category/tutor/subjects
+// @access  Private/admin, tutor
 exports.getRegisteredSubjects = ash(async (req, res, next) => {
   const subjects = await Subject.find({ tutors: req.user._id });
   if (!subjects) {
@@ -92,8 +88,8 @@ exports.getRegisteredSubjects = ash(async (req, res, next) => {
   });
 });
 
-// @desc      Put Delete registered subject tutor
-// @route     PUT /api/v1/category/:catId/subject/:subId/delete
+// @desc      Delete registered subject tutor
+// @route     Delete /api/v1/category/tutor/subjects/:subId
 // @access    Private/Tutor
 exports.deleteRegisteredSubject = ash(async (req, res, next) => {
   const subject = await Subject.findOne({
@@ -129,6 +125,9 @@ exports.deleteRegisteredSubject = ash(async (req, res, next) => {
   });
 });
 
+// @desc      Make Tutor an admin
+// @route     Put /api/v1/:tutorId/admin
+// @access    Private/Admin
 exports.makeTutorAdmin = ash(async (req, res, next) => {
   let tutor = await User.findOne({ _id: req.params.tutorId, role: "tutor" });
   if (!(tutor && tutor.isActive)) {
@@ -160,6 +159,9 @@ exports.makeTutorAdmin = ash(async (req, res, next) => {
   });
 });
 
+// @desc        Make admin tutor
+// @route       Put /api/v1/:userId/tutor"
+// @access      Private/Admin, tutor
 exports.makeAdminTutor = ash(async (req, res, next) => {
   const admin = await User.findOne({ _id: req.params.userId, isAdmin: true });
 
