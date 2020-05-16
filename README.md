@@ -166,7 +166,7 @@ PATCH http://localhost:3000/api/v1/category/:catId
 
 Params
 
-    * catId - Category ID
+* catId - Category ID
 
 #### Body
 
