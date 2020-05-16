@@ -8,41 +8,29 @@ exports.getAllSubjects = ash(async (req, res, next) => {
   const subjects = await Subject.find({ category: catId });
 
   if (subjects.length === 0) {
-    res.send({
-      status: 200,
+    res.status(400).send({
+      status: 400,
       message: `No subjects in this category at the moment!`,
     });
     return;
   }
 
-  res.send({
+  res.status(200).send({
     status: 200,
     subjects: subjects,
   });
-
-  // if (category.subjects.length == 0) {
-  //   res.status(200).send({
-  //     catgeory_name: categName.toUpperCase(),
-  //     subjects: `No subjects in this category at the moment.`,
-  //   });
-  //   return;
-  // }
-  // res.status(200).send({
-  //   category_name: categName.toUpperCase(),
-  //   subjects: category.subjects,
-  // });
 });
 
 exports.getSubjectById = ash(async (req, res, next) => {
   const { subId, catId } = req.params;
   const subject = await Subject.findOne({ _id: subId, category: catId });
   if (!subject) {
-    res.send({
+    res.status(400).send({
       status: 400,
       message: `Subject doesn't exist in this category`,
     });
   }
-  res.send({
+  res.status(200).send({
     status: 200,
     message: `Subject found`,
     subject_name: `${subject.name}`,
@@ -54,13 +42,16 @@ exports.showCategories = ash(async (req, res, next) => {
   try {
     const categories = await Category.find({});
     if (!categories) {
-      res.status(404).send(`No categories found`);
+      res.status(404).send({
+        status: 400,
+        message: `No categories found`,
+      });
     }
 
     await Category.find({})
       .populate("subjects")
       .exec((err, result) =>
-        res.send({
+        res.status(200).send({
           categories: result,
         })
       );
@@ -71,9 +62,10 @@ exports.showCategories = ash(async (req, res, next) => {
 });
 
 exports.getSubjectsByName = ash(async (req, res, next) => {
-  const { name } = req.query; 
+  const { name } = req.query;
   if (!name) {
     res.status(400).send({
+      success: false,
       message: `Name of subject cannot be blank`,
     });
   }
@@ -81,5 +73,5 @@ exports.getSubjectsByName = ash(async (req, res, next) => {
     name: 1,
   });
 
-  res.send({ status: 200, subjects: subject });
+  res.status(200).send({ success: true, subjects: subject });
 });

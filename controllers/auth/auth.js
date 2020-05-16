@@ -51,15 +51,15 @@ exports.login = ash(async (req, res, next) => {
     const user = await User.findOne({ email });
     //   if no user
     if (!user) {
-      res.send({
-        status: 400,
+      res.status(404).send({
+        status: 404,
         message: `No user with this email - ${email} found!`,
       });
     }
     //   if password is wrong
     if (!user.comparePassword(password)) {
       res.send({
-        status: 400,
+        status: 403,
         message: `Your password is invalid!`,
       });
     }
