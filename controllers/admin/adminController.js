@@ -204,7 +204,10 @@ exports.getTutorById = ash(async (req, res, next) => {
   }
   res.status(200).send({
     success: true,
-    tutor_details: tutor,
+    tutorFirstName: tutor.firstName,
+    tutorLastName: tutor.lastName,
+    tutorEmail: tutor.email,
+    role: tutor.role,
   });
 });
 

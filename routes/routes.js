@@ -36,6 +36,7 @@ router.post(
   "/tutors/tutor/:tutorId/",
   verifyToken,
   validate,
+  authorizeRole('admin'),
   deactivateTutorById
 );
 router.post(
