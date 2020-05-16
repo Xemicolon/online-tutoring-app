@@ -43,10 +43,9 @@ router.put(
 );
 
 router.put(
-  "/admin-to-tutor",
+  "/:userId/admin-to-tutor",
   authorizeRole("admin"),
   verifyToken,
-  validate, 
   makeAdminTutor
 );
 

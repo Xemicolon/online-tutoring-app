@@ -161,11 +161,11 @@ exports.makeTutorAdmin = ash(async (req, res, next) => {
 });
 
 exports.makeAdminTutor = ash(async (req, res, next) => {
-  const admin = await User.findOne({ _id: req.user._id, isAdmin: true });
+  const admin = await User.findOne({ _id: req.params.userId, isAdmin: true });
 
   const adminToTutor = await User.findOneAndUpdate(
     { isAdmin: true },
-    { role: "tutor", isAdmin: true },
+    { role: "tutor", isAdmin: false },
     { new: true, upsert: true }
   );
   res.send({
@@ -174,4 +174,3 @@ exports.makeAdminTutor = ash(async (req, res, next) => {
     admin_role: adminToTutor.role,
   });
 });
- 
