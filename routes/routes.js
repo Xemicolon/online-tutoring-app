@@ -36,7 +36,7 @@ router.post(
   "/tutors/tutor/:tutorId/",
   verifyToken,
   validate,
-  authorizeRole('admin'),
+  authorizeRole("admin"),
   deactivateTutorById
 );
 router.post(
@@ -53,11 +53,11 @@ router.post(
     check("categoryName")
       .not()
       .isEmpty()
-      .withMessage("Tutor's email cannot be blank"),
+      .withMessage("Category name cannot be blank"),
     check("subjectName")
       .not()
       .isEmpty()
-      .withMessage("Tutor's email cannot be blank"),
+      .withMessage("Subject name cannot be blank"),
   ],
   validate,
   verifyToken,

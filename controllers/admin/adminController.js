@@ -229,7 +229,6 @@ exports.deactivateTutorById = ash(async (req, res, next) => {
   res.status(200).send({
     success: true,
     message: `Tutor has been successfully deactivated`,
-    deacitcated_tutor: deactivated,
   });
 });
 
@@ -288,10 +287,6 @@ exports.bookLesson = ash(async (req, res, next) => {
       })
     );
   }
-
-  const tutorTakesSubject = tutor.subjects.filter((sub) =>
-    console.log(sub._id.equals(subject._id))
-  );
 
   const newLesson = await Lesson.create({
     student: student.email,
