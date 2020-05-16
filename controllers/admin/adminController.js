@@ -143,7 +143,7 @@ exports.addSubject = ash(async (req, res, next) => {
 });
 
 exports.updateSubjectById = ash(async (req, res, next) => {
-  const { name } = req.body;
+  const { name, description } = req.body;
   const subject = await Subject.findById(req.params.subId);
   if (!subject) {
     res.status(404).send({
@@ -156,11 +156,14 @@ exports.updateSubjectById = ash(async (req, res, next) => {
     { _id: req.params.subId },
     {
       name: name,
+      description: description,
     }
   );
   res.status(200).send({
     success: true,
-    message: `${subject.name} has been updated to ${name}`,
+    message: `Subject updated`,
+    previous_subject_name: subject.name,
+    updated_subject_name: updatedSubject.name
   });
 });
 
