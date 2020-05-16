@@ -156,6 +156,6 @@ router.patch(
   updateSubjectById
 );
 
-router.delete("/:catId/:subId", verifyToken, validate, deleteSubjectById);
+router.delete("/:subId", verifyToken, validate, deleteSubjectById);
 
 module.exports = router;
