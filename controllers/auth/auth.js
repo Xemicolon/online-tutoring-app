@@ -75,7 +75,7 @@ exports.login = ash(async (req, res, next) => {
         status: 200,
         message: `You have successfully logged in!`,
         token: token,
-        user: user,
+        user: {id: user._id, email: user.email, role: user.role, subjects: user.subjects},
       });
   } catch (err) {
     res.send({
