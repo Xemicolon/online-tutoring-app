@@ -425,7 +425,7 @@ Retrieve all tutors
 GET https://online-tutor-api.herokuapp.com/api/v1/tutors
 ```
 
-#### Access - Admi only
+#### Access - Admin only
 
 > GET Retrieve a tutor
 
@@ -434,3 +434,23 @@ Retrieve a tutor by their ID
 ```
 GET https://online-tutor-api.herokuapp.com/api/v1/users/tutor/:tutorId
 ```
+
+#### Access - Admin only
+
+Params
+
+- tutorId - Tutor ID
+
+> DELETE Delete a registered subject
+
+Tutor can delete a subject they registered for using the subject ID
+
+```
+DELETE https://online-tutor-api.herokuapp.com/api/v1/tutor/subjects/:subId
+```
+
+#### Access - Tutor only
+
+Params
+
+- subId - Subject ID

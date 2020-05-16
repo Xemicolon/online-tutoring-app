@@ -94,7 +94,7 @@ exports.getRegisteredSubjects = ash(async (req, res, next) => {
 exports.deleteRegisteredSubject = ash(async (req, res, next) => {
   const subject = await Subject.findOne({
     _id: req.params.subId,
-    tutors: req.user._id,
+    tutors: req.decoded._id,
   });
 
   if (!subject) {
@@ -106,12 +106,12 @@ exports.deleteRegisteredSubject = ash(async (req, res, next) => {
     );
   }
   const user = await User.update(
-    { _id: req.user._id },
+    { _id: req.decoded._id },
     { $pull: { subjects: req.params.subId } }
   );
   const result = await Subject.update(
     { _id: req.params.subId },
-    { $pull: { tutors: req.user._id } }
+    { $pull: { tutors: req.decoded._id } }
   );
   if (!result) {
     res.send({
