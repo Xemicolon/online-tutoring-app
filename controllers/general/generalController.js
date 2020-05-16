@@ -82,7 +82,7 @@ exports.getSubjectsByName = ash(async (req, res, next) => {
 // @route     POST /api/v1/tutors?name=name
 // @access    Private/Admin
 exports.getTutorByFirstName = ash(async (req, res, next) => {
-  const { firstName } = req.body;
+  const { firstName } = req.params;
 
   const tutor = await User.find({ firstName: firstName, role: "tutor" }).sort({
     firstName: 1,
