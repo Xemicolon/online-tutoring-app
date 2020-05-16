@@ -35,7 +35,7 @@ router.delete(
 );
 
 router.put(
-  "/:tutorId/admin",
+  "/users/:tutorId/admin",
   authorizeRole("admin"),
   verifyToken,
   validate,
@@ -43,7 +43,7 @@ router.put(
 );
 
 router.put(
-  "/:userId/tutor",
+  "/users/:userId/tutor",
   authorizeRole("admin"),
   verifyToken,
   makeAdminTutor

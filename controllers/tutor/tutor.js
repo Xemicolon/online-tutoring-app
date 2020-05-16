@@ -160,7 +160,7 @@ exports.makeTutorAdmin = ash(async (req, res, next) => {
 });
 
 // @desc        Make admin tutor
-// @route       Put /api/v1/:userId/tutor"
+// @route       Put /api/v1/users/:userId/tutor"
 // @access      Private/Admin, tutor
 exports.makeAdminTutor = ash(async (req, res, next) => {
   const admin = await User.findOne({ _id: req.params.userId, isAdmin: true });

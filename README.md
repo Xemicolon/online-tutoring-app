@@ -462,3 +462,45 @@ Deactivate a tutor using their ID
 ```
 POST https://online-tutor-api.herokuapp.com/api/v1/users/tutor/:tutorId
 ```
+
+#### Access - Admin only
+
+Params
+
+- tutorId - Tutor ID
+
+> PUT Make tutor admin
+
+Admin can make any tutor an admin using their ID
+
+```
+PUT https://online-tutor-api.herokuapp.com/api/v1/users/tutor/:tutorId
+```
+
+#### Access - Admin only
+
+Params
+
+- tutorId - Tutor ID
+
+> PUT Make admin Tutor
+
+Admin can become a tutor
+
+```
+PUT https://online-tutor-api.herokuapp.com/api/v1/users/:userId/tutor
+```
+
+#### Access - Admin only
+
+Params
+
+- userId - User ID
+
+---
+
+- Version: 1.0
+
+- License: MIT
+
+- Author: Oluwatobiloba Light
