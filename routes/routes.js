@@ -36,43 +36,8 @@ const {
 } = require("../controllers/admin/adminController");
 
 // General routes
-router.get("/categories", verifyToken, validate, showCategories);
-router.get(
-  "/:catId/:subId",
-  verifyToken,
-  [
-    check("subId")
-      .not()
-      .isEmpty()
-      .withMessage("Subject Id field cannot be blank"),
-    check("catId")
-      .not()
-      .isEmpty()
-      .withMessage("Category Id field cannot be blank"),
-  ],
-  validate,
-  getSubjectById
-);
-router.get(
-  "/categories/:catId/subjects",
 
-  validate,
-  verifyToken,
-  getAllSubjects
-);
-router.get(
-  "/tutor",
-  validate,
-  [
-    check("firstName")
-      .not()
-      .isEmpty()
-      .withMessage("First Name of Tutor cannot be blank"),
-  ],
-  verifyToken,
-  getTutorByFirstName
-);
-router.get("/subject", validate, verifyToken, getSubjectsByName);
+
 router.get("/tutors", validate, verifyToken, getAllTutors);
 router.get("/tutors/tutor/:tutorId", validate, verifyToken, getTutorById);
 router.post(
