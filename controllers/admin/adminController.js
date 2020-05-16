@@ -188,7 +188,7 @@ exports.getAllTutors = ash(async (req, res, next) => {
   const tutors = await User.find({ role: "tutor" });
   let result =[]
   for (tutor of tutors) {
-    result.push(tutor.firstName)
+    result.push(tutor.email + ' - ' + tutor.role)
   }
   res.status(200).send({
     success: true,
