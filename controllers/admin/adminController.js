@@ -162,7 +162,7 @@ exports.updateSubjectById = ash(async (req, res, next) => {
   res.status(200).send({
     success: true,
     message: `Subject updated`,
-    details: subject,
+    details: updatedSubject,
   });
 });
 
