@@ -4,12 +4,6 @@ const { check } = require("express-validator");
 const validate = require("../middleware/validate");
 
 // general
-const {
-  showCategories,
-  getAllSubjects,
-  getSubjectsByName,
-  getSubjectById,
-} = require("../controllers/general/generalController");
 
 // student
 const {
@@ -25,7 +19,6 @@ const {
   updateSubjectById,
   deleteSubjectById,
   getAllTutors,
-  getTutorByFirstName,
   getTutorById,
   deactivateTutorById,
   bookLesson,

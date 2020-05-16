@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const db = require("./config/config");
 const cors = require("cors");
-const General = require('./routes/general')
+const General = require("./routes/general");
 const Routes = require("./routes/routes");
 const IndexRoute = require("./routes/index");
 const AuthRoutes = require("./routes/auth");
@@ -20,11 +20,11 @@ app.listen(
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors()); 
+app.use(cors());
 
 app.use("/api/v1", AuthRoutes);
 app.use("/api/v1", IndexRoute);
-app.use("/api/v1", General)
+app.use("/api/v1", General);
 app.use("/api/v1", Routes);
 app.use("/api/v1", TutorRoute);
 app.use("*", (req, res, next) => {

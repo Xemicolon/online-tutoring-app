@@ -1,7 +1,16 @@
 const router = require("express").Router();
-const { authorizeRole, verifyToken } = require("../middleware/auth");
+const { verifyToken } = require("../middleware/auth");
 const { check } = require("express-validator");
 const validate = require("../middleware/validate");
+const {
+  getTutorByFirstName,
+} = require("../controllers/general/generalController");
+const {
+  showCategories,
+  getAllSubjects,
+  getSubjectsByName,
+  getSubjectById,
+} = require("../controllers/general/generalController");
 
 router.get("/categories", verifyToken, validate, showCategories);
 router.get(

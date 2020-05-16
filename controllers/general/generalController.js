@@ -75,3 +75,25 @@ exports.getSubjectsByName = ash(async (req, res, next) => {
 
   res.status(200).send({ success: true, subjects: subject });
 });
+
+// @desc      Search tutor by first name
+// @route     POST /api/v1/tutors?name=name
+// @access    Private/Admin
+exports.getTutorByFirstName = ash(async (req, res, next) => {
+  const { firstName } = req.body;
+
+  const tutor = await User.find({ firstName: firstName, role: "tutor" }).sort({
+    firstName: 1,
+  });
+
+  if (tutor.length < 1) {
+    return res.status(404).send({
+      success: false,
+      message: `No user with that First Name found`,
+    });
+  }
+  res.status(200).send({
+    success: true,
+    result: tutor,
+  });
+});
