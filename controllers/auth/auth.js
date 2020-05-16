@@ -75,7 +75,14 @@ exports.login = ash(async (req, res, next) => {
         status: 200,
         message: `You have successfully logged in!`,
         token: token,
-        user: {id: user._id, email: user.email, role: user.role, subjects: user.subjects},
+        user: {
+          id: user._id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          role: user.role,
+          subjects: user.subjects,
+        },
       });
   } catch (err) {
     res.send({
@@ -91,7 +98,7 @@ exports.logout = ash(async (req, res, next) => {
       maxAge: 0,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-    }) 
+    })
     .json({
       status: 200,
       message: `You have successfully logged out`,
