@@ -344,7 +344,8 @@ Example:
 
 > GET Retrieve a lesson
 
-Get a lesson by it's ID 
+Get a lesson by it's ID
 
 ```
 GET https://online-tutor-api.herokuapp.com/api/v1/lessons/:lessonId
+```
