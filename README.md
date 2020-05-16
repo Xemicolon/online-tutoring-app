@@ -248,10 +248,31 @@ Params
 
 - catId - Category ID
 
-
 > GET Retrieve a subject
 
 Retrieve a subject by ID under a category by ID
 
 ```
 GET https://online-tutor-api.herokuapp.com/api/v1/categories/:catId/subjects/:subId
+```
+
+#### Access - All authenticated users
+
+Params
+
+- catId - Category ID
+- subId - Subject ID
+
+> PATCH Update a subject
+
+Update a subject in a category by Id
+
+```
+PATCH https://online-tutor-api.herokuapp.com/api/v1/subject/:subId
+```
+
+#### Acess - Admin only
+
+Params
+
+* subId - Subject ID
