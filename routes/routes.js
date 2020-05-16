@@ -30,12 +30,22 @@ const {
 
 // General routes
 
-router.get("/tutors", validate, verifyToken, getAllTutors);
-router.get("/tutors/tutor/:tutorId", validate, verifyToken, getTutorById);
+router.get(
+  "/tutors",
+  validate,
+  verifyToken,
+  authorizeRole("admin"),
+  getAllTutors
+);
+router.get(
+  "/tutors/tutor/:tutorId",
+  verifyToken,
+  authorizeRole("admin"),
+  getTutorById
+);
 router.post(
   "/tutors/tutor/:tutorId/",
   verifyToken,
-  validate,
   authorizeRole("admin"),
   deactivateTutorById
 );

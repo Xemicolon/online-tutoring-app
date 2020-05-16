@@ -15,7 +15,7 @@ exports.authorizeRole = (role) => {
       return;
     }
 
-    if (user.isAdmin === false) {
+    if (user.role !== role) {
       res.send({
         status: 401,
         message: `You don't have enough permissions to view this route`,

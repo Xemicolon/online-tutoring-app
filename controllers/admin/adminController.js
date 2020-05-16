@@ -186,9 +186,13 @@ exports.deleteSubjectById = ash(async (req, res, next) => {
 
 exports.getAllTutors = ash(async (req, res, next) => {
   const tutors = await User.find({ role: "tutor" });
+  let result =[]
+  for (tutor of tutors) {
+    result.push(tutor.firstName)
+  }
   res.status(200).send({
     success: true,
-    all_tutors: tutors,
+    all_tutors: result,
   });
 });
 

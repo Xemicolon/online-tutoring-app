@@ -20,6 +20,16 @@ exports.studentBookLesson = ash(async (req, res, next) => {
     name: subjectName,
     category: category._id,
   });
+
+  if (lesson) {
+    return next(
+      res.status(403).send({
+        success: false,
+        message: `You can't book a lesson twice`,
+      })
+    );
+  }
+
   if (
     !(
       categoryName === "primary" ||
@@ -28,16 +38,16 @@ exports.studentBookLesson = ash(async (req, res, next) => {
     )
   ) {
     return next(
-      res.send({
-        status: 400,
+      res.status(404).send({
+        success: false,
         message: `This category ${categoryName} cannot be found`,
       })
     );
   }
   if (!subject) {
     return next(
-      res.send({
-        status: 404,
+      res.status(404).send({
+        success: false,
         message: `Subject doesn't exist or is not in this category!`,
       })
     );
@@ -45,8 +55,8 @@ exports.studentBookLesson = ash(async (req, res, next) => {
 
   if (!tutor) {
     return next(
-      res.send({
-        status: 404,
+      res.status(404).send({
+        success: false,
         message: `Tutor doesn't exist!`,
       })
     );
@@ -54,33 +64,23 @@ exports.studentBookLesson = ash(async (req, res, next) => {
 
   if (!student) {
     return next(
-      res.send({
-        status: 404,
+      res.status(404).send({
+        success: false,
         message: `Student doesn't exist!`,
       })
     );
   }
 
-  const tutorTakesSubject = tutor.subjects.filter((sub) =>
-    //  sub._id.equals(subject._id)
-    console.log(sub._id.equals(subject._id))
-  );
-
-  const newLesson = await Lesson.create({
-    student: student.email,
-    tutor: tutor.email,
+  let newLesson = await new Lesson({
+    student: student,
+    tutor: tutor,
+    category: category,
     booked_by: "Student",
   });
-
-  await Lesson.find({})
-    .populate("student")
-    .populate("tutor")
-    .populate("booked_by")
-    .exec();
+  newLesson.save();
 
   res.status(200).send({
+    success: true,
     message: `Lesson booked`,
-    result: newLesson,
   });
 });
- 
