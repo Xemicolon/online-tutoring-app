@@ -39,7 +39,7 @@ npm run start
 
 ```
 email: kingabesh@admin.com
-password: 12345
+password: 123456
 ```
 
 ### API ENDPOINTS:
