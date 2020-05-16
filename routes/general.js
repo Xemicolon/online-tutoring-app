@@ -14,7 +14,7 @@ const {
 
 router.get("/categories", verifyToken, validate, showCategories);
 router.get(
-  "/:catId/:subId",
+  "/categories/:catId/subjects/:subId",
   verifyToken,
   [
     check("subId")

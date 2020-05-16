@@ -247,3 +247,11 @@ GET https://online-tutor-api.herokuapp.com/api/v1/categories/:catId/subjects
 Params
 
 - catId - Category ID
+
+
+> GET Retrieve a subject
+
+Retrieve a subject by ID under a category by ID
+
+```
+GET https://online-tutor-api.herokuapp.com/api/v1/categories/:catId/subjects/:subId
