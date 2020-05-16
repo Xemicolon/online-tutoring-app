@@ -164,9 +164,16 @@ router.patch(
   ],
   verifyToken,
   validate,
+  authorizeRole("admin"),
   updateSubjectById
 );
 
-router.delete("/:subId", verifyToken, validate, deleteSubjectById);
+router.delete(
+  "/categories/:catId/subjects/:subId",
+  verifyToken,
+  validate,
+  authorizeRole("admin"),
+  deleteSubjectById
+);
 
 module.exports = router;

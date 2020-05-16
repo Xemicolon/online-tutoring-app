@@ -276,3 +276,7 @@ PATCH https://online-tutor-api.herokuapp.com/api/v1/subject/:subId
 Params
 
 * subId - Subject ID
+
+> DELETE Delete a subject
+
+Delete a subject 
