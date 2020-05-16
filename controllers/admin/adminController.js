@@ -134,6 +134,7 @@ exports.addSubject = ash(async (req, res, next) => {
       success: true,
       message: `Subject created successfully`,
       new_subject_name: newSubject.name,
+      new_subject_description: newSubject.description,
       new_subject_category: newSubject.category,
     });
   } catch (err) {
