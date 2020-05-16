@@ -31,8 +31,9 @@ exports.addCategory = ash(async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: `Category added`,
+      category_id: newCat._id,
       category_name: newCat.name,
-      category_description: newCat.description
+      category_description: newCat.description,
     });
   } catch (err) {
     console.log(err);
