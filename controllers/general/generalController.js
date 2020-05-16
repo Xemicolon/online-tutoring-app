@@ -1,12 +1,13 @@
 const ash = require("express-async-handler");
 const Category = require("../../models/Category");
 const Subject = require("../../models/Subject");
+const User = require("../../models/User");
 require("../../middleware/auth");
 
 exports.getAllSubjects = ash(async (req, res, next) => {
   const { catId } = req.params;
   const subjects = await Subject.find({ category: catId });
-  const category = await Category.findOne({_id: catId})
+  const category = await Category.findOne({ _id: catId });
 
   if (subjects.length === 0) {
     res.status(404).send({
@@ -82,7 +83,7 @@ exports.getSubjectsByName = ash(async (req, res, next) => {
 // @route     POST /api/v1/tutors?name=name
 // @access    Private/Admin
 exports.getTutorByFirstName = ash(async (req, res, next) => {
-  const { firstName } = req.params;
+  const { firstName } = req.query;
 
   const tutor = await User.find({ firstName: firstName, role: "tutor" }).sort({
     firstName: 1,
@@ -96,6 +97,8 @@ exports.getTutorByFirstName = ash(async (req, res, next) => {
   }
   res.status(200).send({
     success: true,
-    result: tutor,
+    tutorFirstName: tutor.firstName,
+    tutorLastName: tutor.lastName,
+    tutorEmail: tutor.email
   });
 });

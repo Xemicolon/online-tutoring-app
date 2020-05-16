@@ -40,7 +40,7 @@ router.get(
 router.get("/subject", validate, verifyToken, getSubjectsByName);
 
 router.get(
-  "tutors/tutor",
+  "/tutor",
   validate,
   [
     check("firstName")
