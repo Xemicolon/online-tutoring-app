@@ -10,7 +10,7 @@ exports.authorizeRole = (role) => {
     if (!user) {
       res.send({
         status: 401,
-        message: `No user with this email exists and this is an unauthorized route`,
+        message: `This is an unauthorized route`,
       });
       return;
     }
