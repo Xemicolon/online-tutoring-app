@@ -126,7 +126,7 @@ Create categories for subjects. Category can be PRIMARY, JSS & SSS
 POST https://online-tutor-api.herokuapp.com/api/v1/category
 ```
 
-#### Access - Admin
+#### Access - Admin only
 
 #### Body
 
@@ -152,6 +152,40 @@ Retrieve all categories
 GET https://online-tutor-api.herokuapp.com/api/v1/categories
 ```
 
-#### Access - All users
+#### Access - Authenticated users only
 
-> GET Retrieve a category
+> PATCH Update a category
+
+Update a category using it's ID
+
+```
+PATCH http://localhost:3000/api/v1/category/:catId
+```
+
+#### Access - Admin only
+
+Params
+
+    * catId - Category ID
+
+#### Body
+
+| Key         | Value                | Required |
+| ----------- | -------------------- | -------- |
+| name        | name of the category | yes      |
+| description | category description | no       |
+
+Example
+
+```
+{
+	"name": "sss",
+	"description": "Category for Senior Secondary School Education"
+}
+```
+
+> DELETE Delete a category
+
+Delete a category using it's ID
+
+#### Access - Admin only
