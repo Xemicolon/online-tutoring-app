@@ -6,6 +6,7 @@ require("../../middleware/auth");
 exports.getAllSubjects = ash(async (req, res, next) => {
   const { catId } = req.params;
   const subjects = await Subject.find({ category: catId });
+  const category = await Category.findOne({_id: catId})
 
   if (subjects.length === 0) {
     res.status(404).send({
@@ -17,6 +18,7 @@ exports.getAllSubjects = ash(async (req, res, next) => {
 
   res.status(200).send({
     success: true,
+    category: category.name,
     subjects: subjects,
   });
 });
