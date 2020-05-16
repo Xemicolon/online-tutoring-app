@@ -291,3 +291,13 @@ Params
 
 - subId - Subject ID
 - catId - Category ID
+
+> GET Search for a subject
+
+Search for a subject by subject name sorted alphabetically.
+
+```
+GET https://online-tutor-api.herokuapp.com/api/v1/subject?name=subject_name
+```
+
+#### Access - All authenticated users
