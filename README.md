@@ -271,12 +271,23 @@ Update a subject in a category by Id
 PATCH https://online-tutor-api.herokuapp.com/api/v1/subject/:subId
 ```
 
-#### Acess - Admin only
+#### Acsess - Admin only
 
 Params
 
-* subId - Subject ID
+- subId - Subject ID
 
 > DELETE Delete a subject
 
-Delete a subject 
+Delete a subject under a category by using it's ID
+
+```
+DELETE https://online-tutor-api.herokuapp.com/api/v1/categories/:catId/subjects/:subId
+```
+
+#### Access - Admin only
+
+Params
+
+- subId - Subject ID
+- catId - Category ID
