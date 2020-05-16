@@ -247,6 +247,16 @@ exports.bookLesson = ash(async (req, res, next) => {
     name: subjectName,
     category: category._id,
   });
+
+  if (lesson) {
+    return next(
+      res.status(403).send({
+        success: false,
+        message: `You can't book a lesson twice`,
+      })
+    );
+  }
+
   if (
     !(
       categoryName === "primary" ||
@@ -288,22 +298,17 @@ exports.bookLesson = ash(async (req, res, next) => {
     );
   }
 
-  const newLesson = await Lesson.create({
-    student: student.email,
-    tutor: tutor.email,
-    booked_by: "Student",
+  let newLesson = await new Lesson({
+    student: student,
+    tutor: tutor,
+    category: category,
+    booked_by: "admin",
   });
-
-  await Lesson.find({})
-    .populate("student")
-    .populate("tutor")
-    .populate("booked_by")
-    .exec();
+  newLesson.save();
 
   res.status(200).send({
     success: true,
     message: `Lesson booked`,
-    result: newLesson,
   });
 });
 
