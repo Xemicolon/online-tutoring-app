@@ -213,3 +213,37 @@ POST https://online-tutor-api.herokuapp.com/api/v1/categories/:catId/subject
 ```
 
 #### Access - Admin only
+
+Params
+
+- catId - Category ID
+
+#### Body
+
+| Key         | Value                  | Required |
+| ----------- | ---------------------- | -------- |
+| name        | subject name           | yes      |
+| description | description of subject | optional |
+
+Example
+
+```
+{
+	    "name": "English",
+	    "description": "Basic english language for primary school students"
+}
+```
+
+> GET Retrieve all the subjects
+
+Get all the subjects in a category using the category ID - (catId)
+
+```
+GET https://online-tutor-api.herokuapp.com/api/v1/categories/:catId/subjects
+```
+
+#### Access - All authenticated users
+
+Params
+
+- catId - Category ID
