@@ -375,3 +375,33 @@ DELETE https://online-tutor-api.herokuapp.com/api/v1/lesson/:lessonId
 ```
 
 #### Access - Admin only
+
+Params
+
+- lessonId - Lesson ID
+
+### Tutor
+
+> POST Register to take a subject
+
+Tutor can register to take a subject in any category using their ID
+
+```
+POST https://online-tutor-api.herokuapp.com/api/v1/categories/:catId/subjects/:subId/register
+```
+
+#### Access - Tutor only
+
+Params
+
+- catId - Category ID
+- subId - Subject ID
+
+> GET Retrieve all subjects tutor registers
+
+A tutor can retrieve all the subjects they have registered to take
+
+```
+GET https://online-tutor-api.herokuapp.com/api/v1/tutor/subjects
+```
+

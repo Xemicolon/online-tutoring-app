@@ -19,7 +19,7 @@ router.put(
 );
 
 router.get(
-  "/category/tutor/subjects",
+  "/tutor/subjects",
   verifyToken,
   validate,
   authorizeRole("tutor"),
@@ -27,7 +27,7 @@ router.get(
 );
 
 router.delete(
-  "/category/tutor/subjects/:subId",
+  "/tutor/subjects/:subId",
   verifyToken,
   validate,
   authorizeRole("tutor"),
