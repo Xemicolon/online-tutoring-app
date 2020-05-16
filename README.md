@@ -405,5 +405,32 @@ A tutor can retrieve all the subjects they have registered to take
 GET https://online-tutor-api.herokuapp.com/api/v1/tutor/subjects
 ```
 
+#### Access - Tutor only
 
+> Get Search for Tutor
 
+Search for tutor using their first name sorted alphabetically
+
+```
+GET https://online-tutor-api.herokuapp.com/api/v1/tutor?firstName=first_name
+```
+
+#### Access - All authenticated users
+
+> GET Retrieve all tutors
+
+Retrieve all tutors
+
+```
+GET https://online-tutor-api.herokuapp.com/api/v1/tutors
+```
+
+#### Access - Admi only
+
+> GET Retrieve a tutor
+
+Retrieve a tutor by their ID
+
+```
+GET https://online-tutor-api.herokuapp.com/api/v1/users/tutor/:tutorId
+```

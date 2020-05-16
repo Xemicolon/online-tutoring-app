@@ -38,7 +38,7 @@ router.get(
   getAllTutors
 );
 router.get(
-  "/tutors/tutor/:tutorId",
+  "/users/tutor/:tutorId",
   verifyToken,
   authorizeRole("admin"),
   getTutorById
