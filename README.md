@@ -187,5 +187,12 @@ Example
 > DELETE Delete a category
 
 Delete a category using it's ID
+```
+DELETE https://online-tutor-api.herokuapp.com/api/v1/category/:catId
+```
 
 #### Access - Admin only
+
+Params
+
+* catId - Category ID
