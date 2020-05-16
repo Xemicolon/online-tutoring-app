@@ -24,7 +24,7 @@ app.use(cors());
 
 app.use("/api/v1", AuthRoutes);
 app.use("/api/v1", IndexRoute);
-app.use("api/v1", General)
+app.use("/api/v1", General)
 app.use("/api/v1", Routes);
 app.use("/api/v1", TutorRoute);
 app.use("*", (req, res, next) => {
