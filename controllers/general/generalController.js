@@ -8,7 +8,7 @@ exports.getAllSubjects = ash(async (req, res, next) => {
   const subjects = await Subject.find({ category: catId });
 
   if (subjects.length === 0) {
-    res.status(400).send({
+    res.status(404).send({
       success: false,
       message: `No subjects in this category at the moment!`,
     });

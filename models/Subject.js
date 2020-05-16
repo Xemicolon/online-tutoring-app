@@ -7,6 +7,9 @@ const SubjectSchema = new Schema(
       type: String,
       required: true,
     },
+    description: {
+      type: String,
+    },
     tutors: [
       {
         type: Schema.Types.ObjectId,
@@ -20,5 +23,5 @@ const SubjectSchema = new Schema(
   },
   { timestamps: true }
 );
- 
+
 module.exports = mongoose.model("Subject", SubjectSchema);

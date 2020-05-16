@@ -90,7 +90,7 @@ exports.deleteCategory = ash(async (req, res, next) => {
 });
 
 exports.addSubject = ash(async (req, res, next) => {
-  const { name } = req.body;
+  const { name, description } = req.body;
   const subject = await Subject.findOne({ name });
   const cat = await Category.findOne({ _id: req.params.catId });
   if (!cat) {
@@ -118,6 +118,7 @@ exports.addSubject = ash(async (req, res, next) => {
     }
     const newSub = {
       name: name,
+      description: description,
       category: req.params.catId,
     };
     const newSubject = new Subject(newSub);
@@ -391,4 +392,3 @@ exports.deleteLessonById = ash(async (req, res, next) => {
     return;
   }
 });
-
