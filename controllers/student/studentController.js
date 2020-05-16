@@ -5,6 +5,9 @@ const Category = require("../../models/Category");
 const Subject = require("../../models/Subject");
 require("../../middleware/auth");
 
+// @desc      POST Student can book a lesson
+// @route     POST /api/v1/student/lesson
+// @access    Private/Student
 exports.studentBookLesson = ash(async (req, res, next) => {
   const { tutorEmail, studentEmail } = req.body;
   let { categoryName, subjectName } = req.body;
