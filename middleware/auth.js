@@ -30,7 +30,8 @@ exports.verifyToken = ash(async (req, res, next) => {
   let token = req.headers.cookie.split("token=").join("");
   if (token) {
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    req.user = await User.findById(decoded.id);
+    const user = await User.findById(decoded.id);
+
     if (decoded) {
       req.decoded = decoded;
       token = req.headers.cookie.split("token=").join("");

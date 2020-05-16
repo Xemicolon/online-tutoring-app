@@ -12,10 +12,10 @@ exports.tutorRegisterSubject = ash(async (req, res, next) => {
   const category = await Category.findById({ _id: catId });
   const subject = await Subject.findById({ _id: subId });
 
-  if (!req.user.role === "tutor") {
+  if (!req.decoded.role === "tutor") {
     return next(
       res.send({
-        status: 400,
+        success: false,
         message: `Admin needs to be a tutor to take this subject`,
       })
     );
@@ -59,7 +59,7 @@ exports.tutorRegisterSubject = ash(async (req, res, next) => {
     { new: true, useFindAndModify: false }
   );
   res.send({
-    status: 200,
+    success: true,
     message: `You have successfully registered to take this course`,
     result: result,
   });
@@ -87,7 +87,7 @@ exports.getRegisteredSubjects = ash(async (req, res, next) => {
     result.push(subject.name);
   }
   res.send({
-    status: 200,
+    success: true,
     subjects: result,
   });
 });
@@ -124,7 +124,7 @@ exports.deleteRegisteredSubject = ash(async (req, res, next) => {
     });
   }
   res.send({
-    status: 200,
+    success: true,
     message: `You have stopped taking this subject`,
   });
 });
@@ -154,7 +154,7 @@ exports.makeTutorAdmin = ash(async (req, res, next) => {
   );
 
   res.send({
-    status: 200,
+    success: true,
     message: `You have made ${tutor.email} an admin`,
     tutor_admin_status: tutor.isAdmin,
   });
@@ -169,7 +169,7 @@ exports.makeAdminTutor = ash(async (req, res, next) => {
     { new: true, upsert: true }
   );
   res.send({
-    status: 200,
+    success: true,
     message: `You have made ${adminToTutor.email} a tutor`,
     admin_role: adminToTutor.role,
   });
