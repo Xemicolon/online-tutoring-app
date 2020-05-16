@@ -69,7 +69,7 @@ exports.tutorRegisterSubject = ash(async (req, res, next) => {
 // @route   Get /api/v1/category/tutor/subjects
 // @access  Private/admin, tutor
 exports.getRegisteredSubjects = ash(async (req, res, next) => {
-  const subjects = await Subject.find({ tutors: req.user._id });
+  const subjects = await Subject.find({ tutors: req.decoded._id });
   if (!subjects) {
     return next(
       res.send({
