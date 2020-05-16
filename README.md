@@ -125,3 +125,33 @@ Create categories for subjects. Category can be PRIMARY, JSS & SSS
 ```
 POST https://online-tutor-api.herokuapp.com/api/v1/category
 ```
+
+#### Access - Admin
+
+#### Body
+
+| Key         | Value                   | Required |
+| ----------- | ----------------------- | -------- |
+| name        | name of category        | yes      |
+| description | description of category | optional |
+
+Example
+
+```
+{
+	"name": "sss",
+	"description": "Category for Senior Secondary School Education"
+}
+```
+
+> GET Retrieve all the categories
+
+Retrieve all categories
+
+```
+GET https://online-tutor-api.herokuapp.com/api/v1/categories
+```
+
+#### Access - All users
+
+> GET Retrieve a category
