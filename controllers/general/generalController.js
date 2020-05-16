@@ -9,14 +9,14 @@ exports.getAllSubjects = ash(async (req, res, next) => {
 
   if (subjects.length === 0) {
     res.status(400).send({
-      status: 400,
+      success: false,
       message: `No subjects in this category at the moment!`,
     });
     return;
   }
 
   res.status(200).send({
-    status: 200,
+    success: true,
     subjects: subjects,
   });
 });
@@ -26,12 +26,12 @@ exports.getSubjectById = ash(async (req, res, next) => {
   const subject = await Subject.findOne({ _id: subId, category: catId });
   if (!subject) {
     res.status(400).send({
-      status: 400,
+      success: false,
       message: `Subject doesn't exist in this category`,
     });
   }
   res.status(200).send({
-    status: 200,
+    success: true,
     message: `Subject found`,
     subject_name: `${subject.name}`,
     subject_category: `${subject.category}`,
@@ -43,7 +43,7 @@ exports.showCategories = ash(async (req, res, next) => {
     const categories = await Category.find({});
     if (!categories) {
       res.status(404).send({
-        status: 400,
+        success: false,
         message: `No categories found`,
       });
     }
