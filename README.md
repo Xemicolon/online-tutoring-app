@@ -454,3 +454,11 @@ DELETE https://online-tutor-api.herokuapp.com/api/v1/tutor/subjects/:subId
 Params
 
 - subId - Subject ID
+
+> POST Deactivate tutor
+
+Deactivate a tutor using their ID
+
+```
+POST https://online-tutor-api.herokuapp.com/api/v1/users/tutor/:tutorId
+```

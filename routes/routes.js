@@ -44,7 +44,7 @@ router.get(
   getTutorById
 );
 router.post(
-  "/tutors/tutor/:tutorId/",
+  "/users/tutor/:tutorId/",
   verifyToken,
   authorizeRole("admin"),
   deactivateTutorById
