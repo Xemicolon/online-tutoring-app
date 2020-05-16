@@ -30,7 +30,6 @@ const {
 
 // General routes
 
-
 router.get("/tutors", validate, verifyToken, getAllTutors);
 router.get("/tutors/tutor/:tutorId", validate, verifyToken, getTutorById);
 router.post(
@@ -83,7 +82,7 @@ router.patch(
   "/lesson",
   validate,
   verifyToken,
-  authorizeRole("admin"), 
+  authorizeRole("admin"),
   updateLessonById
 );
 router.delete(
@@ -145,7 +144,13 @@ router.post(
 
 router.patch(
   "/subject/:subId",
-  [check("subId").not().isEmpty().withMessage("Subject name cannot be blank")],
+  [
+    check("name").not().isEmpty().withMessage("Name cannot be blank"),
+    check("description")
+      .not()
+      .isEmpty()
+      .withMessage("Description cannot be blank"),
+  ],
   verifyToken,
   validate,
   updateSubjectById
