@@ -166,7 +166,7 @@ PATCH http://localhost:3000/api/v1/category/:catId
 
 Params
 
-* catId - Category ID
+- catId - Category ID
 
 #### Body
 
@@ -187,6 +187,7 @@ Example
 > DELETE Delete a category
 
 Delete a category using it's ID
+
 ```
 DELETE https://online-tutor-api.herokuapp.com/api/v1/category/:catId
 ```
@@ -195,4 +196,18 @@ DELETE https://online-tutor-api.herokuapp.com/api/v1/category/:catId
 
 Params
 
-* catId - Category ID
+- catId - Category ID
+
+### Subject
+
+Create, read, update and delete subject
+
+> POST Create a subject
+
+Create subjects under these categories (Primary, JSS, SSS) using the categort ID (catId)
+
+```
+POST https://online-tutor-api.herokuapp.com/api/v1/categories/:catId/subject
+```
+
+#### Access - Admin only
