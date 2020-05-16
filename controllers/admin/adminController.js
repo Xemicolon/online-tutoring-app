@@ -23,7 +23,7 @@ exports.addCategory = ash(async (req, res, next) => {
     if (category) {
       res.status(403).json({
         success: false,
-        message: `Category exists`,
+        message: `The category you're trying to add already exists`,
       });
       return;
     }
