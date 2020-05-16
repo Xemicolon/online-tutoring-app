@@ -2,6 +2,9 @@ const ash = require("express-async-handler");
 const User = require("../../models/User");
 require("../../middleware/auth");
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.register = ash(async (req, res, next) => {
   const { firstName, lastName, email, password, role } = req.body;
   //   if (role === "admin") {
@@ -45,6 +48,9 @@ exports.register = ash(async (req, res, next) => {
   }
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.login = ash(async (req, res, next) => {
   const { email, password } = req.body;
   try {
@@ -92,6 +98,9 @@ exports.login = ash(async (req, res, next) => {
   }
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.logout = ash(async (req, res, next) => {
   res
     .cookie("token", none, {

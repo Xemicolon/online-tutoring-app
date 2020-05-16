@@ -70,13 +70,13 @@ POST https://online-tutor-api.herokuapp.com/api/v1/auth/register
 
 ##### Body
 
-| Key       | Value              | Required |
-| --------- | ------------------ | -------- |
-| firstName | First Name of user | Yes      |
-| lastName  | Last name of user  | Yes      |
-| email     | Email of user      | Yes      |
-| password  | Password of user   | Yes      |
-| role      | Role of user       | Yes      |
+| Key       | Value          | Required |
+| --------- | -------------- | -------- |
+| firstName | Use First Name | Yes      |
+| lastName  | User Last Name | Yes      |
+| email     | User Email     | Yes      |
+| password  | User Password  | Yes      |
+| role      | User role      | Yes      |
 
 Example:
 

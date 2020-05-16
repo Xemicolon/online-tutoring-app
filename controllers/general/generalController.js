@@ -4,6 +4,9 @@ const Subject = require("../../models/Subject");
 const User = require("../../models/User");
 require("../../middleware/auth");
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.getAllSubjects = ash(async (req, res, next) => {
   const { catId } = req.params;
   const subjects = await Subject.find({ category: catId });
@@ -24,6 +27,9 @@ exports.getAllSubjects = ash(async (req, res, next) => {
   });
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.getSubjectById = ash(async (req, res, next) => {
   const { subId, catId } = req.params;
   const subject = await Subject.findOne({ _id: subId, category: catId });
@@ -41,6 +47,9 @@ exports.getSubjectById = ash(async (req, res, next) => {
   });
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.showCategories = ash(async (req, res, next) => {
   try {
     const categories = await Category.find({});
@@ -64,6 +73,9 @@ exports.showCategories = ash(async (req, res, next) => {
   }
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.getSubjectsByName = ash(async (req, res, next) => {
   const { name } = req.query;
   if (!name) {

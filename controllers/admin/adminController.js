@@ -5,6 +5,9 @@ const Lesson = require("../../models/Lesson");
 const User = require("../../models/User");
 require("../../middleware/auth");
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.addCategory = ash(async (req, res, next) => {
   const { name, description } = req.body;
 
@@ -41,6 +44,9 @@ exports.addCategory = ash(async (req, res, next) => {
   }
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.updateCategory = ash(async (req, res, next) => {
   try {
     const { name, description } = req.body;
@@ -67,6 +73,9 @@ exports.updateCategory = ash(async (req, res, next) => {
   }
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.deleteCategory = ash(async (req, res, next) => {
   try {
     const { catId } = req.params;
@@ -89,6 +98,9 @@ exports.deleteCategory = ash(async (req, res, next) => {
   }
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.addSubject = ash(async (req, res, next) => {
   const { name, description } = req.body;
   const subject = await Subject.findOne({ name });
@@ -142,6 +154,9 @@ exports.addSubject = ash(async (req, res, next) => {
   }
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.updateSubjectById = ash(async (req, res, next) => {
   const { name, description } = req.body;
   const subject = await Subject.findById(req.params.subId);
@@ -166,6 +181,9 @@ exports.updateSubjectById = ash(async (req, res, next) => {
   });
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.deleteSubjectById = ash(async (req, res, next) => {
   const { subId, catId } = req.params;
   const subject = await Subject.findOne({ _id: subId });
@@ -184,11 +202,14 @@ exports.deleteSubjectById = ash(async (req, res, next) => {
   });
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.getAllTutors = ash(async (req, res, next) => {
   const tutors = await User.find({ role: "tutor" });
-  let result =[]
+  let result = [];
   for (tutor of tutors) {
-    result.push(tutor.email + ' - ' + tutor.role)
+    result.push(tutor.email + " - " + tutor.role);
   }
   res.status(200).send({
     success: true,
@@ -196,6 +217,9 @@ exports.getAllTutors = ash(async (req, res, next) => {
   });
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.getTutorById = ash(async (req, res, next) => {
   const { tutorId } = req.params;
   const tutor = await User.findOne({ _id: tutorId });
@@ -215,6 +239,9 @@ exports.getTutorById = ash(async (req, res, next) => {
   });
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.deactivateTutorById = ash(async (req, res, next) => {
   const { tutorId } = req.params;
   const tutor = await User.findOne({ _id: tutorId });
@@ -236,6 +263,9 @@ exports.deactivateTutorById = ash(async (req, res, next) => {
   });
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.bookLesson = ash(async (req, res, next) => {
   const { tutorEmail, studentEmail } = req.body;
   let { categoryName, subjectName } = req.body;
@@ -316,6 +346,9 @@ exports.bookLesson = ash(async (req, res, next) => {
   });
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.retrieveLessons = ash(async (req, res, next) => {
   const lessons = await Lesson.find({});
   if (!lessons) {
@@ -331,6 +364,9 @@ exports.retrieveLessons = ash(async (req, res, next) => {
   });
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.getLessonById = ash(async (req, res, next) => {
   const { lessonId } = req.params;
   const lesson = await Lesson.findOne({ _id: lessonId });
@@ -349,6 +385,9 @@ exports.getLessonById = ash(async (req, res, next) => {
   });
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.updateLessonById = ash(async (req, res, next) => {
   try {
     const { student_name, tutor_name, lessonId } = req.body;
@@ -376,6 +415,9 @@ exports.updateLessonById = ash(async (req, res, next) => {
   }
 });
 
+// @desc      Put register tutor to take a subject
+// @route     PUT /api/v1/categories/:catId/subjects/:subId/register
+// @access    Private/Admin, Tutor
 exports.deleteLessonById = ash(async (req, res, next) => {
   const { lessonId } = req.params;
   const lesson = await Lesson.findOne({ _id: lessonId });
