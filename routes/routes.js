@@ -97,7 +97,7 @@ router.patch(
   updateLessonById
 );
 router.delete(
-  "/lessons/lesson/:lessonId",
+  "/lessons/:lessonId",
   validate,
   verifyToken,
   authorizeRole("admin"),

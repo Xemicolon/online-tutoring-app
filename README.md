@@ -349,3 +349,29 @@ Get a lesson by it's ID
 ```
 GET https://online-tutor-api.herokuapp.com/api/v1/lessons/:lessonId
 ```
+
+#### Access - All authenticated users
+
+Params
+
+- lessonId - Lesson ID
+
+> GET Retrieve lessons
+
+Retrieve all booked lessons
+
+```
+GET https://online-tutor-api.herokuapp.com/api/v1/lessons
+```
+
+#### Access - Admin only
+
+> DELETE Delete a lesson
+
+Delete a lesson by it's ID
+
+```
+DELETE https://online-tutor-api.herokuapp.com/api/v1/lesson/:lessonId
+```
+
+#### Access - Admin only
