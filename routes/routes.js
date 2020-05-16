@@ -83,7 +83,7 @@ router.post(
 );
 router.get("/lessons", validate, verifyToken, retrieveLessons);
 router.get(
-  "/lessons/lesson/:lessonId",
+  "/lesson/:lessonId",
   validate,
   verifyToken,
   authorizeRole("admin"),

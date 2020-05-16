@@ -301,3 +301,50 @@ GET https://online-tutor-api.herokuapp.com/api/v1/subject?name=subject_name
 ```
 
 #### Access - All authenticated users
+
+### Lesson
+
+> POST Book a lesson
+
+Student can book a lesson or admin can book a lesson for the student.
+
+#### Admin route
+
+```
+POST https://online-tutor-api.herokuapp.com/api/v1/lesson
+```
+
+#### Student route
+
+```
+POST https://online-tutor-api.herokuapp.com/api/v1/student/lesson
+```
+
+#### Access - Admin and student only.
+
+#### Body
+
+| Key          | Value                | Required |
+| ------------ | -------------------- | -------- |
+| studentEmail | Student's email      | yes      |
+| tutorEmail   | Tutor's email        | yes      |
+| categoryName | Name of the category | yes      |
+| subjectName  | Name of the subject  | yes      |
+
+Example:
+
+```
+{
+	    "studentEmail": "tobilight@student.com",
+	    "tutorEmail": "sleekcodes@tutor.com",
+	    "subjectName": "Maths",
+	    "categoryName": "Primary"
+}
+```
+
+> GET Retrieve a lesson
+
+Get a lesson by it's ID 
+
+```
+GET https://online-tutor-api.herokuapp.com/api/v1/lessons/:lessonId
